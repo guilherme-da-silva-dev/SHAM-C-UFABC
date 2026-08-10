@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHAM-C | Projeto UFABC</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Tailwind Config para Cores da UFABC e Animações -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ufabc: {
+                            green: '#005C42', // Verde institucional
+                            dark: '#003b29',
+                            light: '#128a67',
+                            yellow: '#F2C12E', // Amarelo complementar
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome para Ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Estilos adicionais para animações de scroll */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            visibility: hidden;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, visibility;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: none;
+            visibility: visible;
+        }
+        
+        /* Padrão de fundo para a seção Hero */
+        .bg-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-800 bg-gray-50 antialiased selection:bg-ufabc-yellow selection:text-ufabc-dark">
+
+    <!-- Navegação -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-md shadow-sm z-50 transition-all duration-300 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-3">
+                    <!-- Logo Simulada -->
+                    <div class="w-10 h-10 rounded-lg bg-ufabc-green flex items-center justify-center text-white font-bold text-xl shadow-md">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <div>
+                        <span class="font-extrabold text-xl tracking-tight text-ufabc-green">SHAM-C</span>
+                        <span class="block text-xs font-medium text-gray-500 -mt-1">Projeto UFABC</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#problema" class="text-gray-600 hover:text-ufabc-green font-medium transition">O Problema</a>
+                    <a href="#impacto" class="text-gray-600 hover:text-ufabc-green font-medium transition">Impacto</a>
+                    <a href="#solucao" class="text-gray-600 hover:text-ufabc-green font-medium transition">A Solução</a>
+                    <a href="#inovacao" class="text-gray-600 hover:text-ufabc-green font-medium transition">Inovação</a>
+                    <a href="#equipe" class="text-gray-600 hover:text-ufabc-green font-medium transition">Equipe</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-ufabc-green focus:outline-none p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 px-4 pt-2 pb-4 space-y-1 shadow-lg">
+            <a href="#problema" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-ufabc-green hover:bg-gray-50 rounded-md">O Problema</a>
+            <a href="#impacto" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-ufabc-green hover:bg-gray-50 rounded-md">Impacto</a>
+            <a href="#solucao" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-ufabc-green hover:bg-gray-50 rounded-md">A Solução</a>
+            <a href="#inovacao" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-ufabc-green hover:bg-gray-50 rounded-md">Inovação</a>
+            <a href="#equipe" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-ufabc-green hover:bg-gray-50 rounded-md">Equipe</a>
+        </div>
+    </nav>
+
+    <!-- BLOCO 1: Cabeçalho (Hero Section) -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-gradient-to-br from-ufabc-dark via-ufabc-green to-ufabc-light text-white overflow-hidden">
+        <div class="absolute inset-0 bg-pattern opacity-30"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+                <div class="lg:col-span-6 text-center lg:text-left mb-12 lg:mb-0">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-sm font-semibold text-ufabc-yellow mb-6">
+                        <i class="fa-solid fa-leaf mr-2"></i> Transição Energética Brasileira
+                    </div>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                        Transformando o Desperdício de Energia em <span class="text-ufabc-yellow">Oportunidade</span>.
+                    </h1>
+                    <p class="text-xl sm:text-2xl font-light text-white/90 mb-6 leading-relaxed">
+                        Sistema Híbrido de Armazenamento para Mitigação do Curtailment.
+                    </p>
+                    <p class="text-base sm:text-lg text-white/70 mb-10 max-w-2xl mx-auto lg:mx-0">
+                        Como a integração entre baterias de íons de lítio e hidrogênio verde pode salvar bilhões de reais, otimizar parques eólicos e solares e acelerar a transição energética do Brasil.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#solucao" class="px-8 py-4 bg-ufabc-yellow text-ufabc-dark hover:bg-yellow-400 font-bold rounded-xl shadow-lg transition-all transform hover:-translate-y-1">
+                            Conhecer a Solução
+                        </a>
+                        <a href="#problema" class="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold rounded-xl backdrop-blur-sm transition-all">
+                            Entender o Problema
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Arte Visual: Imagem Vetorizada Mais Clara -->
+                <div class="lg:col-span-6 relative flex justify-center mt-10 lg:mt-0">
+                    <div class="relative w-full max-w-sm aspect-square flex items-center justify-center fade-in-section">
+                        <!-- Fundo do Hub -->
+                        <div class="absolute inset-0 bg-ufabc-yellow/20 rounded-full blur-3xl animate-pulse"></div>
+                        
+                        <!-- Conexões Vectorizadas -->
+                        <svg class="absolute w-full h-full z-0" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Linha Top para Centro -->
+                            <path d="M100 40 L100 100" stroke="rgba(255,255,255,0.3)" stroke-width="3" stroke-dasharray="6 6" class="animate-[dash_2s_linear_infinite]" />
+                            <!-- Linha Centro para Baixo Esq -->
+                            <path d="M100 100 L50 150" stroke="rgba(255,255,255,0.3)" stroke-width="3" stroke-dasharray="6 6" class="animate-[dash_2s_linear_infinite]" />
+                            <!-- Linha Centro para Baixo Dir -->
+                            <path d="M100 100 L150 150" stroke="rgba(255,255,255,0.3)" stroke-width="3" stroke-dasharray="6 6" class="animate-[dash_2s_linear_infinite]" />
+                        </svg>
+
+                        <!-- Ícone Central: Hub SHAM-C -->
+                        <div class="absolute w-28 h-28 bg-ufabc-yellow rounded-2xl flex items-center justify-center shadow-2xl transform rotate-45 z-10 border-4 border-white/20">
+                            <i class="fa-solid fa-microchip text-5xl text-ufabc-dark -rotate-45"></i>
+                        </div>
+                        <span class="absolute mt-40 z-20 text-white font-bold bg-ufabc-dark px-3 py-1 rounded shadow-md border border-white/10 text-sm">SHAM-C</span>
+
+                        <!-- Ícone Topo: Solar -->
+                        <div class="absolute top-0 w-20 h-20 bg-blue-500/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.5)] border-2 border-white/30 z-10 animate-float">
+                            <i class="fa-solid fa-solar-panel text-3xl text-white"></i>
+                        </div>
+                        <span class="absolute top-20 z-20 text-blue-100 text-xs font-bold uppercase tracking-wider">Geração</span>
+
+                        <!-- Ícone Baixo Esq: Bateria -->
+                        <div class="absolute bottom-4 left-0 w-20 h-20 bg-emerald-500/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.5)] border-2 border-white/30 z-10 animate-float" style="animation-delay: 1s;">
+                            <i class="fa-solid fa-car-battery text-3xl text-white"></i>
+                        </div>
+                        <span class="absolute bottom-0 left-4 z-20 text-emerald-100 text-xs font-bold uppercase tracking-wider">Lítio</span>
+
+                        <!-- Ícone Baixo Dir: Hidrogênio -->
+                        <div class="absolute bottom-4 right-0 w-20 h-20 bg-cyan-500/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(6,182,212,0.5)] border-2 border-white/30 z-10 animate-float" style="animation-delay: 2s;">
+                            <i class="fa-solid fa-flask text-3xl text-white"></i>
+                        </div>
+                        <span class="absolute bottom-0 right-4 z-20 text-cyan-100 text-xs font-bold uppercase tracking-wider">H₂</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Shape divider -->
+        <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-full h-[50px] lg:h-[100px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118,137.9,114,207,98.66,246.5,89.5,285.4,72.7,321.39,56.44Z" class="fill-gray-50"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- BLOCO 2: O Problema -->
+    <section id="problema" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-section">
+                <span class="text-ufabc-green font-bold tracking-wider uppercase text-sm">O Cenário Atual</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-6">O Desafio do Curtailment</h2>
+                <div class="w-24 h-1 bg-ufabc-yellow mx-auto rounded"></div>
+            </div>
+
+            <div class="lg:grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in-section space-y-6 text-lg text-gray-600">
+                    <p class="leading-relaxed">
+                        O Brasil vive uma rápida e necessária expansão das energias renováveis, especialmente as fontes eólica e solar fotovoltaica. No entanto, o rápido crescimento gerou um desafio operacional estrutural denominado <strong class="text-gray-900">curtailment</strong> (cortes forçados de geração).
+                    </p>
+                    <p class="leading-relaxed">
+                        O problema ocorre porque a capacidade de geração instalada, particularmente no Nordeste, cresce muito mais rápido do que a capacidade da rede de transmissão para escoar essa energia, e da capacidade de absorção do próprio sistema elétrico.
+                    </p>
+                    <div class="bg-white p-6 rounded-2xl border-l-4 border-ufabc-yellow shadow-sm">
+                        <p class="text-base text-gray-700 italic">
+                            "Na prática, os parques eólicos e solares têm condições meteorológicas perfeitas para produzir eletricidade, mas o Operador Nacional do Sistema Elétrico (ONS) determina o corte ou redução da produção para preservar a segurança da rede."
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Infográfico CSS do Gargalo -->
+                <div class="mt-12 lg:mt-0 fade-in-section">
+                    <div class="bg-white p-6 md:p-8 rounded-3xl shadow-xl border border-gray-100 flex flex-col items-center">
+                        <h3 class="text-lg font-bold text-gray-800 mb-10 text-center">A Dinâmica do Desperdício</h3>
+                        
+                        <div class="w-full flex items-center justify-between gap-2 md:gap-4 relative px-2">
+                            <!-- 1. Geração (Solar) -->
+                            <div class="flex-1 flex flex-col items-center">
+                                <div class="bg-blue-50 text-blue-600 w-full py-6 md:py-8 rounded-2xl flex flex-col items-center justify-center border-2 border-blue-200 shadow-sm relative z-10 transition hover:bg-blue-100">
+                                    <div class="flex gap-2 md:gap-4 mb-3 text-4xl md:text-5xl">
+                                        <i class="fa-solid fa-solar-panel animate-[pulse_2s_ease-in-out_infinite]"></i>
+                                    </div>
+                                    <span class="font-bold text-xs md:text-sm text-center px-2 uppercase tracking-wide">Alta Geração<br>Solar</span>
+                                </div>
+                            </div>
+
+                            <!-- 2. Gargalo (Funil da Transmissão) -->
+                            <div class="w-16 md:w-24 flex flex-col items-center justify-center relative">
+                                <span class="text-[10px] md:text-xs font-bold text-gray-500 mb-2 uppercase text-center absolute -top-8 w-max">Rede Limitada</span>
+                                <!-- SVG de um funil horizontal simbolizando o gargalo -->
+                                <div class="w-full flex justify-center items-center h-16 text-gray-300">
+                                     <svg width="100%" height="100%" viewBox="0 0 60 40" preserveAspectRatio="none">
+                                         <polygon points="0,0 60,15 60,25 0,40" fill="currentColor"></polygon>
+                                         <!-- Linha de energia tentando passar -->
+                                         <line x1="0" y1="20" x2="60" y2="20" stroke="#FBBF24" stroke-width="2" stroke-dasharray="4" class="animate-[dash_1s_linear_infinite]"></line>
+                                     </svg>
+                                </div>
+                            </div>
+
+                            <!-- 3. Desperdício (Curtailment) -->
+                            <div class="flex-1 flex flex-col items-center">
+                                <div class="bg-red-50 text-red-600 w-full py-6 md:py-8 rounded-2xl flex flex-col items-center justify-center border-2 border-red-200 shadow-sm border-dashed relative z-10 transition hover:bg-red-100 animate-[pulse_1.2s_ease-in-out_infinite]">
+                                    <div class="relative mb-3">
+                                        <i class="fa-solid fa-bolt text-3xl md:text-5xl text-gray-300"></i>
+                                        <i class="fa-solid fa-ban text-4xl md:text-6xl text-red-500 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 drop-shadow-md"></i>
+                                    </div>
+                                    <span class="font-bold text-xs md:text-sm text-center px-2 uppercase tracking-wide">Curtailment<br><span class="font-normal text-[10px] md:text-xs capitalize text-red-400">Corte Forçado</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-500 text-center mt-8 px-4 bg-gray-50 py-3 rounded-lg w-full">
+                            As usinas estão prontas para gerar, mas a "estrada" é estreita. O ONS é obrigado a cortar a produção para preservar a segurança da rede.
+                        </p>
+                        
+                        <style>
+                            @keyframes dash {
+                                to { stroke-dashoffset: -8; }
+                            }
+                        </style>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOCO 3: O Impacto -->
+    <section id="impacto" class="py-24 bg-ufabc-dark text-white relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="h-full w-full" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="grid-pattern" width="40" height="40" patternUnits="userSpaceOnUse">
+                        <path d="M0 40V0H40" fill="none" stroke="white" stroke-width="1"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#grid-pattern)"/>
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-section">
+                <h2 class="text-3xl md:text-4xl font-extrabold mb-6">O Preço do Desperdício</h2>
+                <p class="text-xl text-gray-300">
+                    O curtailment deixou de ser um problema pontual de operação e se tornou um desafio estrutural e econômico gigantesco para o setor elétrico brasileiro.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center fade-in-section">
+                <!-- Impacto Energético -->
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 transform transition hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-battery-empty text-3xl text-blue-400"></i>
+                    </div>
+                    <h4 class="text-gray-300 text-sm font-semibold uppercase tracking-wider mb-2">Impacto Energético</h4>
+                    <div class="text-5xl font-extrabold text-white mb-2">37 TWh</div>
+                    <div class="text-xl font-bold text-blue-300 mb-4">Desperdiçados em 2025</div>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Isso equivale a aproximadamente <strong class="text-white">20%</strong> de todo o potencial de geração eólica e solar centralizada no ano.
+                    </p>
+                </div>
+
+                <!-- Impacto Econômico -->
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 transform transition hover:-translate-y-2 shadow-[0_0_30px_rgba(242,193,46,0.15)] relative">
+                    <!-- Ribbon -->
+                    <div class="absolute top-0 right-0 bg-ufabc-yellow text-ufabc-dark text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-xl">
+                        Acumulado 21-25
+                    </div>
+                    <div class="w-16 h-16 bg-ufabc-yellow/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-coins text-3xl text-ufabc-yellow"></i>
+                    </div>
+                    <h4 class="text-gray-300 text-sm font-semibold uppercase tracking-wider mb-2">Impacto Econômico</h4>
+                    <div class="text-5xl font-extrabold text-white mb-2">R$ 6,5 Bi</div>
+                    <div class="text-xl font-bold text-ufabc-yellow mb-4">Em Prejuízos</div>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        Prejuízo financeiro acumulado associado a esses cortes forçados de geração em apenas 4 anos.
+                    </p>
+                </div>
+
+                <!-- Impacto Ambiental -->
+                <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 border border-white/20 transform transition hover:-translate-y-2">
+                    <div class="w-16 h-16 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-leaf text-3xl text-emerald-400"></i>
+                    </div>
+                    <h4 class="text-gray-300 text-sm font-semibold uppercase tracking-wider mb-2">Impacto Ambiental</h4>
+                    <div class="text-5xl font-extrabold text-white mb-2">Eficiência</div>
+                    <div class="text-xl font-bold text-emerald-300 mb-4">Comprometida</div>
+                    <p class="text-sm text-gray-400 leading-relaxed">
+                        A impossibilidade de utilizar essa energia limpa disponível representa uma perda inaceitável no processo de transição energética.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOCO 4: A Solução -->
+    <section id="solucao" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-4xl mx-auto mb-16 fade-in-section">
+                <span class="text-ufabc-green font-bold tracking-wider uppercase text-sm">A Nossa Proposta</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-6">Apresentando o SHAM-C</h2>
+                <div class="w-24 h-1 bg-ufabc-yellow mx-auto rounded mb-8"></div>
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Para solucionar essa lacuna, propomos o <strong class="text-ufabc-green">Sistema Híbrido de Armazenamento para Mitigação do Curtailment</strong>. Uma infraestrutura tecnológica instalada junto aos parques renováveis, focada em capturar e transformar o excedente de energia antes que ele seja cortado.
+                </p>
+            </div>
+
+            <!-- Fluxograma Visual -->
+            <div class="bg-gray-50 rounded-3xl p-8 md:p-12 border border-gray-200 shadow-xl fade-in-section">
+                <h3 class="text-center text-xl font-bold text-gray-800 mb-10">Integração Inteligente de Tecnologias</h3>
+                
+                <!-- Desktop Flow -->
+                <div class="hidden md:flex items-center justify-center gap-4 relative">
+                    <!-- Geração -->
+                    <div class="w-48 bg-white border-2 border-gray-300 rounded-xl p-6 text-center shadow-md z-10">
+                        <i class="fa-solid fa-fan text-4xl text-blue-500 mb-3"></i>
+                        <h4 class="font-bold text-gray-800">Parque Eólico/Solar</h4>
+                        <p class="text-xs text-gray-500 mt-2">Geração com risco de corte</p>
+                    </div>
+
+                    <!-- Arrow -->
+                    <div class="flex-1 h-1 bg-ufabc-green relative flex items-center justify-center max-w-[80px]">
+                        <i class="fa-solid fa-chevron-right text-ufabc-green absolute -right-2"></i>
+                    </div>
+
+                    <!-- Controlador -->
+                    <div class="w-56 bg-ufabc-dark text-white rounded-xl p-6 text-center shadow-lg z-10 border-b-4 border-ufabc-yellow relative">
+                        <i class="fa-solid fa-microchip text-4xl mb-3 text-ufabc-yellow"></i>
+                        <h4 class="font-bold">Controlador Inteligente</h4>
+                        <p class="text-xs text-gray-300 mt-2">Analisa excedente e demanda</p>
+                        
+                        <!-- Splitting lines -->
+                        <div class="absolute top-1/2 -right-8 w-8 h-1 bg-ufabc-green"></div>
+                        <div class="absolute top-[-30px] right-[-32px] w-1 h-[60px] bg-ufabc-green"></div>
+                        <div class="absolute bottom-[-30px] right-[-32px] w-1 h-[60px] bg-ufabc-green"></div>
+                    </div>
+
+                    <!-- Branches -->
+                    <div class="flex flex-col gap-16 ml-8 relative">
+                        <!-- Caminho A: Baterias -->
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 border-b-[3px] border-dashed border-emerald-500 relative">
+                                <i class="fa-solid fa-chevron-right text-emerald-500 absolute -right-2 -top-1.5"></i>
+                            </div>
+                            <div class="w-56 bg-white border-2 border-emerald-200 rounded-xl p-6 text-center shadow-md">
+                                <div class="bg-emerald-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fa-solid fa-car-battery text-xl text-emerald-600"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-800">Baterias (Lítio)</h4>
+                                <p class="text-xs text-gray-500 mt-2">Curta duração. Retorna à rede na alta demanda.</p>
+                            </div>
+                            <div class="w-8 border-b-[3px] border-gray-300 relative">
+                                <i class="fa-solid fa-chevron-right text-gray-400 absolute -right-2 -top-1.5"></i>
+                            </div>
+                            <div class="text-gray-600 font-bold text-sm bg-gray-100 px-4 py-2 rounded-lg">Rede Elétrica</div>
+                        </div>
+
+                        <!-- Caminho B: Hidrogênio -->
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 border-b-[3px] border-dashed border-cyan-500 relative">
+                                <i class="fa-solid fa-chevron-right text-cyan-500 absolute -right-2 -top-1.5"></i>
+                            </div>
+                            <div class="w-56 bg-white border-2 border-cyan-200 rounded-xl p-6 text-center shadow-md">
+                                <div class="bg-cyan-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
+                                    <i class="fa-solid fa-flask text-xl text-cyan-600"></i>
+                                </div>
+                                <h4 class="font-bold text-gray-800">Eletrolisador (H₂)</h4>
+                                <p class="text-xs text-gray-500 mt-2">Longa duração. Transforma excesso prolongado.</p>
+                            </div>
+                            <div class="w-8 border-b-[3px] border-gray-300 relative">
+                                <i class="fa-solid fa-chevron-right text-gray-400 absolute -right-2 -top-1.5"></i>
+                            </div>
+                            <div class="text-gray-600 font-bold text-sm bg-gray-100 px-4 py-2 rounded-lg">Indústria</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Flow -->
+                <div class="flex flex-col md:hidden gap-6 items-center">
+                    <div class="w-full max-w-sm bg-white border border-gray-300 rounded-xl p-4 text-center shadow-sm">
+                        <h4 class="font-bold"><i class="fa-solid fa-fan text-blue-500 mr-2"></i> Parque Eólico/Solar</h4>
+                    </div>
+                    <i class="fa-solid fa-arrow-down text-gray-400"></i>
+                    <div class="w-full max-w-sm bg-ufabc-dark text-white rounded-xl p-4 text-center shadow-md border-b-4 border-ufabc-yellow">
+                        <h4 class="font-bold"><i class="fa-solid fa-microchip text-ufabc-yellow mr-2"></i> Controlador Inteligente</h4>
+                    </div>
+                    <div class="flex w-full max-w-sm justify-around">
+                        <div class="w-1/2 flex flex-col items-center">
+                            <div class="h-8 border-l-2 border-dashed border-emerald-500 mb-2"></div>
+                            <div class="bg-white border-2 border-emerald-200 w-full rounded-xl p-4 text-center text-sm">
+                                <strong>Baterias (Lítio)</strong><br><span class="text-xs text-gray-500">Curto prazo -> Rede</span>
+                            </div>
+                        </div>
+                        <div class="w-1/2 flex flex-col items-center">
+                            <div class="h-8 border-l-2 border-dashed border-cyan-500 mb-2"></div>
+                            <div class="bg-white border-2 border-cyan-200 w-full rounded-xl p-4 text-center text-sm">
+                                <strong>Hidrogênio (H₂)</strong><br><span class="text-xs text-gray-500">Longo prazo -> Indústria</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center max-w-3xl mx-auto fade-in-section">
+                <p class="text-gray-600">
+                    Ao invés de descartar a energia, o sistema decide o melhor destino: devolução rápida à rede nos horários de pico (Lítio) ou armazenamento em larga escala e longa duração (Hidrogênio Verde) para descarbonização industrial.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOCO 5: Por que o SHAM-C é diferente? -->
+    <section id="inovacao" class="py-24 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-section">
+                <span class="text-ufabc-green font-bold tracking-wider uppercase text-sm">O Diferencial</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-6">Viabilidade e Inovação</h2>
+                <div class="w-24 h-1 bg-ufabc-yellow mx-auto rounded mb-8"></div>
+                <p class="text-lg text-gray-600">
+                    A principal inovação do SHAM-C está na sinergia tecnológica e no <strong>empilhamento de receitas</strong> (Revenue Stacking). O sistema garante viabilidade diversificando as formas de retorno.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 fade-in-section items-stretch">
+                <!-- Pilar Econômico -->
+                <div class="bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-lg transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 bg-green-100 text-green-600 rounded-lg flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-sack-dollar"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Retorno Econômico Múltiplo</h3>
+                        <ul class="space-y-3 text-gray-600 text-sm">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-ufabc-green mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Arbitragem de energia (comprar na baixa, vender na alta).</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-ufabc-green mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Prestação de serviços ancilares (segurança para a rede).</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-ufabc-green mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Comercialização direta do H₂ para indústrias e transportes.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pilar Tecnológico/Social -->
+                <div class="bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-lg transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-gears"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Desenvolvimento Regional</h3>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                            Projeto voltado estrategicamente para as usinas do <strong>Nordeste</strong> brasileiro.
+                        </p>
+                        <ul class="space-y-3 text-gray-600 text-sm">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-ufabc-green mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Fomenta a criação de novas cadeias tecnológicas.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-ufabc-green mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Gera empregos de alta qualificação técnica e acadêmica.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pilar Sustentabilidade -->
+                <div class="bg-white rounded-2xl p-8 shadow-md border border-gray-100 hover:shadow-lg transition-shadow flex flex-col justify-between">
+                    <div>
+                        <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-lg flex items-center justify-center text-2xl mb-6">
+                            <i class="fa-solid fa-earth-americas"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 mb-4">Sustentabilidade Eficiente</h3>
+                        <p class="text-gray-600 text-sm mb-4 leading-relaxed">
+                            Maximiza o aproveitamento da infraestrutura já instalada.
+                        </p>
+                        <ul class="space-y-3 text-gray-600 text-sm">
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-ufabc-green mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Aproveitamento máximo da energia gerada sem desperdício.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fa-solid fa-check text-ufabc-green mt-1 mr-2 flex-shrink-0"></i>
+                                <span>Produção de Hidrogênio Verde para descarbonizar outros setores pesados.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOCO 6: Criadores da Página e do Projeto -->
+    <section id="equipe" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16 fade-in-section">
+                <span class="text-ufabc-green font-bold tracking-wider uppercase text-sm">Os Autores</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-gray-900 mt-2 mb-6">Nossa Equipe</h2>
+                <div class="w-24 h-1 bg-ufabc-yellow mx-auto rounded mb-8"></div>
+                <p class="text-lg text-gray-600 mb-4">
+                    Projeto desenvolvido para a disciplina de <strong>Introdução às Engenharias</strong> da Universidade Federal do ABC (UFABC).
+                </p>
+            </div>
+
+            <!-- Grade com os 8 integrantes -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 fade-in-section max-w-5xl mx-auto">
+                
+                <!-- Membro 1 -->
+                <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 flex items-center gap-3 hover:shadow-md transition group hover:border-ufabc-green">
+                    <i class="fa-solid fa-user text-gray-400 group-hover:text-ufabc-green transition"></i>
+                    <h3 class="font-medium text-sm text-gray-800">Inae Dias de Oliveira</h3>
+                </div>
+
+                <!-- Membro 2 -->
+                <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 flex items-center gap-3 hover:shadow-md transition group hover:border-ufabc-green">
+                    <i class="fa-solid fa-user text-gray-400 group-hover:text-ufabc-green transition"></i>
+                    <h3 class="font-medium text-sm text-gray-800">Guilherme da Silva Batista</h3>
+                </div>
+
+                <!-- Membro 3 -->
+                <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 flex items-center gap-3 hover:shadow-md transition group hover:border-ufabc-green">
+                    <i class="fa-solid fa-user text-gray-400 group-hover:text-ufabc-green transition"></i>
+                    <h3 class="font-medium text-sm text-gray-800">Gabriel Cintra Dos Santos</h3>
+                </div>
+
+                <!-- Membro 4 -->
+                <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 flex items-center gap-3 hover:shadow-md transition group hover:border-ufabc-green">
+                    <i class="fa-solid fa-user text-gray-400 group-hover:text-ufabc-green transition"></i>
+                    <h3 class="font-medium text-sm text-gray-800">Pedro Henrique Brasilino Alves</h3>
+                </div>
+
+                <!-- Membro 5 -->
+                <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 flex items-center gap-3 hover:shadow-md transition group hover:border-ufabc-green">
+                    <i class="fa-solid fa-user text-gray-400 group-hover:text-ufabc-green transition"></i>
+                    <h3 class="font-medium text-sm text-gray-800">Pedro Henrique M. R. Cattein</h3>
+                </div>
+
+                <!-- Membro 6 -->
+                <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 flex items-center gap-3 hover:shadow-md transition group hover:border-ufabc-green">
+                    <i class="fa-solid fa-user text-gray-400 group-hover:text-ufabc-green transition"></i>
+                    <h3 class="font-medium text-sm text-gray-800">Pedro Eduardo Lourenço de Matos</h3>
+                </div>
+
+                <!-- Membro 7 -->
+                <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 flex items-center gap-3 hover:shadow-md transition group hover:border-ufabc-green">
+                    <i class="fa-solid fa-user text-gray-400 group-hover:text-ufabc-green transition"></i>
+                    <h3 class="font-medium text-sm text-gray-800">Davi Silva de Campos</h3>
+                </div>
+
+                <!-- Membro 8 -->
+                <div class="bg-gray-50 border border-gray-100 rounded-xl p-4 flex items-center gap-3 hover:shadow-md transition group hover:border-ufabc-green">
+                    <i class="fa-solid fa-user text-gray-400 group-hover:text-ufabc-green transition"></i>
+                    <h3 class="font-medium text-sm text-gray-800">Eric Dombrauskas Voyagioglou</h3>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- BLOCO 7: Referências -->
+    <section class="py-16 bg-gray-900 text-gray-300">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-2xl font-bold text-white mb-8 border-b border-gray-700 pb-4 flex items-center">
+                <i class="fa-solid fa-book-bookmark mr-3 text-ufabc-yellow"></i> Referências
+            </h2>
+            <ul class="space-y-4 text-sm font-light list-disc pl-5">
+                <li>
+                    <strong>ACENDE BRASIL.</strong> Curtailment: um sinal de evolução e oportunidade para integração das renováveis. São Paulo: Instituto Acende Brasil, 2025.
+                </li>
+                <li>
+                    <strong>ACENDE BRASIL.</strong> Flexibilidade operativa, curtailment e MMGD: desafios conjunturais e estruturais. São Paulo: Instituto Acende Brasil, 2026.
+                </li>
+                <li>
+                    <strong>ACENDE BRASIL.</strong> Programa Energia Transparente: 19ª edição. São Paulo: Instituto Acende Brasil, 2026.
+                </li>
+                <li>
+                    <strong>BRASIL. Ministério de Minas e Energia.</strong> MME publica diretrizes para leilão inédito de armazenamento de energia em baterias no Brasil. Brasília, DF: MME, 2026.
+                </li>
+                <li>
+                    <strong>BRASIL. Ministério de Minas e Energia.</strong> Alexandre Silveira lança consulta pública para leilão inédito de sistemas de armazenamento em baterias. Brasília, DF: MME, 2025.
+                </li>
+                <li>
+                    <strong>BRASIL. Ministério de Minas e Energia.</strong> MME debate tendências globais e desafios regulatórios para o armazenamento de energia por baterias. Brasília, DF: MME, 2025.
+                </li>
+                <li>
+                    <strong>CHENAF, Adil.</strong> Brasil descarta energia enquanto discute as regras. CNN Brasil, 1 maio 2026.
+                </li>
+                <li>
+                    <strong>INSTITUTO ACENDE BRASIL.</strong> Cortes de geração: o novo e preocupante normal. São Paulo: Instituto Acende Brasil, 2025.
+                </li>
+                <li>
+                    <strong>OPERADOR NACIONAL DO SISTEMA ELÉTRICO – ONS.</strong> Relatório de operação do Sistema Interligado Nacional. Rio de Janeiro: ONS, 2025.
+                </li>
+                <li>
+                    <strong>REUTERS.</strong> Engie eyes bitcoin mine and storage system at huge new Brazil solar plant. Reuters, 23 fev. 2026.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex justify-center items-center gap-2 text-white/50 mb-4">
+                <i class="fa-solid fa-bolt text-ufabc-green"></i>
+                <span class="font-bold tracking-wider">SHAM-C</span>
+            </div>
+            <p class="text-gray-500 text-xs">
+                &copy; 2026 Projeto SHAM-C. Atividade Acadêmica - UFABC. Disciplina: Introdução às Engenharias.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when clicking a link
+            const menuLinks = menu.querySelectorAll('a');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    menu.classList.add('hidden');
+                });
+            });
+
+            // Scroll Animation Observer
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Animate only once
+                    }
+                });
+            }, observerOptions);
+
+            // Select all sections to animate
+            const sections = document.querySelectorAll('.fade-in-section');
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Smooth scrolling for anchor links (safeguard for older browsers)
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
